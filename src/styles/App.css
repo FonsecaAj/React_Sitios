@@ -1,0 +1,15 @@
+:root{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
+
+body{margin:0;background:transparent;display:block;min-height:100vh}
+
+#root, #root > div {width:100%}
+
+.app-header{width:100%;box-sizing:border-box}
+
+.header-inner{max-width:1200px;margin:0 auto;padding:0 1rem;display:flex;align-items:center}
+.brand h1{margin:0;font-size:1.4rem}
+.subtitle{margin:0.25rem 0 0;color:#e6f0ff}
+
+.card{padding:2em}
+
+code{background:#f3f4f6;padding:2px 6px;border-radius:6px;font-family:monospace}
