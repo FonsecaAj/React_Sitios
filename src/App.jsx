@@ -1,6 +1,9 @@
 import './styles/App.css'
-import './styles/personas.css'
-import Personas from './components/Personas'
+// import './styles/personas.css'
+
+import ListadoMarcas from "./components/ListadoMarcas";
+import ListadoInconsistencias from "./components/ListadoInconsistencias"; // <-- FALTA ESTA IMPORTACIÓN
+import Personas from './components/Personas';
 
 function App() {
   return (
@@ -15,14 +18,20 @@ function App() {
       </header>
 
       <main className="app-main">
-        <Personas />
+
+        {/* ============================== */}
+        {/*    MOSTRAR INCONSISTENCIAS     */}
+        {/* ============================== */}
+
+        <ListadoInconsistencias />
+
       </main>
 
       <footer className="app-footer">
         <small>CUC - 2025 &copy; Todos los derechos reservados</small>
       </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

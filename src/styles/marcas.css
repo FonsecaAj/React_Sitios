@@ -1,0 +1,140 @@
+:root {
+  --blue-500: #0b63d4;
+  --blue-600: #084fb0;
+  --blue-100: #e9f2ff;
+  --muted: #6b7280;
+  --bg-card: #ffffff;
+}
+
+/* ===== FIX: asegurar color de texto legible en marcas ===== */
+.marcas-wrapper,
+.marcas-wrapper * {
+  color: #03305a;              /* texto oscuro */
+  box-sizing: border-box;
+}
+
+/* CONTENEDOR GENERAL */
+.marcas-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.marcas-container {
+  width: 100%;
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 40px rgba(3, 48, 90, 0.08);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* TÍTULO */
+.marcas-container h2 {
+  margin: 0 0 1.2rem;
+  font-size: 1.5rem;
+  color: #03305a; /* reforzamos el color del título */
+}
+
+/* FILTROS */
+.filtros {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filtros div {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.filtros input,
+.filtros select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #e6eefb;
+  background: #f7faff;
+  font-size: 0.95rem;
+  color: #03305a;              /* texto de input oscuro */
+}
+
+.filtros input::placeholder {
+  color: #9aa8c9;
+}
+
+.filtros button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--blue-500);
+  border: 0;
+  cursor: pointer;
+  color: white;                /* texto blanco porque el fondo es azul */
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.filtros button:hover {
+  background: var(--blue-600);
+}
+
+/* TABLA */
+.tabla-marcas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.tabla-marcas th {
+  background: var(--blue-100);
+  color: var(--blue-600);      /* encabezado azul oscuro */
+  text-align: left;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.tabla-marcas td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #03305a;              /* celdas con texto oscuro */
+}
+
+.tabla-marcas tbody tr:hover {
+  background: #f5f9ff;
+  transition: background 0.15s;
+}
+
+/* PAGINACIÓN */
+.pagination {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--blue-500);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pagination button:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: var(--blue-600);
+}
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
