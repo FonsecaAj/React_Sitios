@@ -2,7 +2,7 @@ import './styles/App.css'
 // import './styles/personas.css'
 
 import ListadoMarcas from "./components/ListadoMarcas";
-import ListadoInconsistencias from "./components/ListadoInconsistencias"; // <-- FALTA ESTA IMPORTACIÓN
+import ListadoInconsistencias from "./components/ListadoInconsistencias"; 
 import Personas from './components/Personas';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
       <main className="app-main">
 
         {/* ============================== */}
-        {/*    MOSTRAR INCONSISTENCIAS     */}
+        {/*    MOSTRAR INCONSISTENCIAS SOLO PRUEBAAAAA    */}
         {/* ============================== */}
 
         <ListadoInconsistencias />

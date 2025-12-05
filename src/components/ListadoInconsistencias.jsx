@@ -1,6 +1,6 @@
 import React from "react";
 import { useInconsistencias } from "../hooks/useInconsistencias";
-import "../styles/marcas.css"; // usamos mismo estilo
+import "../styles/marcas.css"; // usamos mismo estilo de marcas para el flujo de pantallas
 
 export default function ListadoInconsistencias() {
   const {
@@ -15,7 +15,7 @@ export default function ListadoInconsistencias() {
     usuario,
     setUsuario,
     exportCSV
-  } = useInconsistencias(11); // id quemado admin
+  } = useInconsistencias(11); // id cambiar este ID por el id tomado de login, quemado ahorita porque no tenemos login
 
   return (
     <div className="marcas-wrapper">
