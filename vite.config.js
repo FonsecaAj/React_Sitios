@@ -10,6 +10,13 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
         rewrite: path => path.replace(/^\/marcas-api/, '/MarcasInconsistencias')
+      },
+      '/proc1-api': {
+        target: 'https://tiusr25pl.cuc-carrera-ti.ac.cr',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path =>
+          path.replace(/^\/proc1-api/, '/apiproc1/api/proc1')
       }
     }
   }
