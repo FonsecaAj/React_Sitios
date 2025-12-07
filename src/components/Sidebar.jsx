@@ -1,4 +1,3 @@
-// src/components/Sidebar.jsx
 export default function Sidebar({ rol, seccion, onChangeSeccion, onLogout }) {
   return (
     <aside className="sidebar-rm">
@@ -37,6 +36,23 @@ export default function Sidebar({ rol, seccion, onChangeSeccion, onLogout }) {
             }
           >
             Marcas
+          </a>
+        )}
+
+        {rol === 3 && (
+          <a
+            href="#proc1"
+            onClick={(e) => {
+              e.preventDefault();
+              onChangeSeccion("proc1");
+            }}
+            style={
+              seccion === "proc1"
+                ? { background: "#e5f0ff", color: "#0f59c3" }
+                : undefined
+            }
+          >
+            Proc1
           </a>
         )}
       </nav>
