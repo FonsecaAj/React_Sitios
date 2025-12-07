@@ -171,14 +171,7 @@ export function useAuth() {
 
       console.log("Rol devuelto:", rol, "usuarioPlano:", usuarioPlano);
 
-      //  Si quieres volver a bloquear por rol, descomenta esto:
-      // if (rol !== 2 && rol !== 3) {
-      //   clasificarMensaje(
-      //     "Acceso no autorizado. Solo usuarios de rol funcionario o jefatura."
-      //   );
-      //   setUser(null);
-      //   return;
-      // }
+  
 
       const nombreCompleto = obtenerNombreCompleto(usuarioPlano, usuario);
 
