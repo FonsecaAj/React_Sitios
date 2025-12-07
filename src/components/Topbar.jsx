@@ -1,15 +1,17 @@
 // src/components/Topbar.jsx
 
-export default function Topbar({ nombreCompleto, onLogout }) {
+export default function Topbar({ nombreCompleto }) {
   return (
-    <div className="topbar">
-      <div className="user-info">
-        <span>{nombreCompleto}</span>
-        <img src="/imagen/avatar.png" alt="Avatar del usuario" />
-        <button className="btn-topbar-logout" onClick={onLogout}>
-          Salir
-        </button>
+    <header className="topbar-rm">
+      <div className="topbar-spacer" />
+      <div className="topbar-user">
+        <span className="topbar-user-name">{nombreCompleto}</span>
+        <img
+          src="/imagen/avatar.png"
+          alt="Avatar del usuario"
+          className="topbar-avatar"
+        />
       </div>
-    </div>
+    </header>
   );
 }

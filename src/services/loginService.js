@@ -1,4 +1,4 @@
-
+// src/services/loginService.js
 import axios from "axios";
 
 const api = axios.create({
@@ -7,17 +7,20 @@ const api = axios.create({
 
 
 export async function login(usuario, contrasenna) {
+  const url = "/api/auth/login"; 
+
+  console.log("Llamando a:", api.defaults.baseURL + url);
+
   const response = await api.post(
-    "/login",
-    null,
+    url,
+    null, 
     {
       headers: {
-        usuario,
-        contrasenna,
+        usuario: usuario,
+        contrasenna: contrasenna,
       },
     }
   );
-
 
   return response.data;
 }

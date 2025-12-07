@@ -1,10 +1,16 @@
 // src/components/LoginPage.jsx
 import { useState, useEffect } from "react";
 
-export default function LoginPage({ onLogin, cargando, mensaje, tipoMensaje, limpiarMensaje }) {
+export default function LoginPage({
+  onLogin,
+  cargando,
+  mensaje,
+  tipoMensaje,
+  limpiarMensaje,
+}) {
   const [usuario, setUsuario] = useState("");
   const [contrasenna, setContrasenna] = useState("");
-  const [mostrarContrasena, setMostrarContrasena] = useState(false);
+  const [mostrarPassword, setMostrarPassword] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
 
   useEffect(() => {
@@ -23,50 +29,56 @@ export default function LoginPage({ onLogin, cargando, mensaje, tipoMensaje, lim
     limpiarMensaje();
   };
 
-  const tipoClaseHeader =
+  const headerClass =
     tipoMensaje === "Error"
-      ? "bg-danger text-white"
+      ? "modal-header error"
       : tipoMensaje === "Advertencia"
-      ? "bg-warning text-dark"
-      : "bg-primary text-white";
-
-  const claseBtnClose =
-    tipoMensaje === "Advertencia" ? "btn-close" : "btn-close btn-close-white";
+      ? "modal-header warning"
+      : "modal-header info";
 
   return (
     <div className="login-page">
-      <div className="login-container">
-        <img src="/imagen/logo.jpg" alt="Logo de la empresa" />
-        <h2>Iniciar Sesión</h2>
+      <div className="login-card">
+        <img
+          src="/imagen/logo.jpg"
+          alt="Logo de la empresa"
+          className="login-logo"
+        />
+        <h1 className="login-title">Iniciar Sesión</h1>
 
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="usuario"
-            placeholder="Usuario"
-            value={usuario}
-            onChange={(e) => setUsuario(e.target.value)}
-            required
-          />
-
-          <div className="password-container">
+        <form onSubmit={handleSubmit} className="login-form">
+          {/* USUARIO */}
+          <div className="form-group">
             <input
-              type={mostrarContrasena ? "text" : "password"}
-              name="contrasena"
-              id="contrasena"
+              type="text"
+              placeholder="Usuario"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+              required
+            />
+          </div>
+
+          {/* CONTRASEÑA */}
+          <div className="form-group password-group">
+            <input
+              type={mostrarPassword ? "text" : "password"}
               placeholder="Contraseña"
               value={contrasenna}
               onChange={(e) => setContrasenna(e.target.value)}
               required
             />
-            <i
-              className={mostrarContrasena ? "bi bi-eye-slash" : "bi bi-eye"}
-              id="togglePassword"
-              onClick={() => setMostrarContrasena((v) => !v)}
-            ></i>
+
+            <button
+              type="button"
+              className="password-toggle"
+              onClick={() => setMostrarPassword((v) => !v)}
+              aria-label={mostrarPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+            >
+              <i className={`bi ${mostrarPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
+            </button>
           </div>
 
-          <button type="submit" disabled={cargando}>
+          <button type="submit" className="btn-login" disabled={cargando}>
             {cargando ? "Validando..." : "Aceptar"}
           </button>
         </form>
@@ -74,41 +86,23 @@ export default function LoginPage({ onLogin, cargando, mensaje, tipoMensaje, lim
 
       {mensaje && mostrarModal && (
         <>
-          <div
-            className="modal fade show d-block"
-            tabIndex="-1"
-            aria-labelledby="mensajeModalLabel"
-            aria-modal="true"
-            role="dialog"
-          >
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                <div className={`modal-header ${tipoClaseHeader}`}>
-                  <h5 className="modal-title" id="mensajeModalLabel">
-                    {tipoMensaje}
-                  </h5>
-                  <button
-                    type="button"
-                    className={claseBtnClose}
-                    aria-label="Cerrar"
-                    onClick={cerrarModal}
-                  ></button>
-                </div>
-                <div className="modal-body text-center">{mensaje}</div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={cerrarModal}
-                  >
-                    Cerrar
-                  </button>
-                </div>
+          <div className="custom-modal-backdrop" onClick={cerrarModal}></div>
+          <div className="custom-modal">
+            <div className="custom-modal-inner">
+              <div className={headerClass}>
+                <h5>{tipoMensaje}</h5>
+                <button className="btn-close-modal" onClick={cerrarModal}>
+                  ×
+                </button>
+              </div>
+              <div className="modal-body">{mensaje}</div>
+              <div className="modal-footer">
+                <button className="btn-secondary" onClick={cerrarModal}>
+                  Cerrar
+                </button>
               </div>
             </div>
           </div>
-
-          <div className="modal-backdrop fade show"></div>
         </>
       )}
     </div>
