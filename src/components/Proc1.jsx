@@ -1,18 +1,27 @@
+// src/components/Proc1.jsx
+
 import React from "react";
 import { useProc1 } from "../hooks/useProc1";
-import "../styles/Proc1.css";
+import MessageModal from "./MessageModal"; // Importamos el componente MessageModal
+import "../styles/Proc1.css"; 
 
 export default function Proc1() {
 
+    // Destructuramos todas las props necesarias de useProc1()
     const {
         fechaInicio, setFechaInicio,
         fechaFin, setFechaFin,
         areaId, setAreaId,
         usuarioId, setUsuarioId,
         areas, funcionarios,
-        modal, closeModal,
-        ejecutarProceso
+        modal, closeModal, // Estado del modal y su función de cierre
+        ejecutarProceso // Función que maneja la lógica y puede abrir el modal
     } = useProc1();
+    
+    // Función para manejar el clic en el botón (opcional, podrías dejar onClick={ejecutarProceso})
+    const handleExecute = () => {
+        ejecutarProceso();
+    };
 
     return (
         <div className="container">
@@ -87,58 +96,25 @@ export default function Proc1() {
                 <div className="actions">
                     <button
                         className="btn btn-primary px-4"
-                        onClick={ejecutarProceso}
+                        onClick={handleExecute}
                     >
                         Ejecutar proceso
                     </button>
                 </div>
             </div>
 
-            {/* Modal */}
-            {modal.show && (
-                <>
-                    <div className="modal-backdrop fade show"></div>
+            {/* =================================================== */}
+            {/* INVOCACIÓN DEL COMPONENTE MESSAGE MODAL */}
+            {/* Reemplazamos todo el markup anterior con el componente */}
+            {/* =================================================== */}
+            <MessageModal
+                show={modal.show}
+                type={modal.type}
+                title={modal.title}
+                message={modal.message}
+                onClose={closeModal} // Pasamos la función del hook
+            />
 
-                    <div className="modal fade show d-block">
-                        <div className="modal-dialog modal-top">
-                            <div className="modal-content">
-
-                                {/* Encabezado */}
-                                <div
-                                    className={`modal-header text-white ${
-                                        modal.type === "success" ? "bg-success" : "bg-danger"
-                                    }`}
-                                >
-                                    <h5 className="modal-title fw-semibold">
-                                        {modal.title}
-                                    </h5>
-                                    <button className="btn-close" onClick={closeModal}></button>
-                                </div>
-
-                                {/* Cuerpo */}
-                                <div className="modal-body text-center">
-                                    <p className="mb-0">{modal.message}</p>
-                                </div>
-
-                                {/* Footer */}
-                                <div className="modal-footer justify-content-center">
-                                    <button
-                                        className={`btn px-4 ${
-                                            modal.type === "success"
-                                                ? "btn-success"
-                                                : "btn-secondary"
-                                        }`}
-                                        onClick={closeModal}
-                                    >
-                                        Cerrar
-                                    </button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </>
-            )}
         </div>
     );
 }
