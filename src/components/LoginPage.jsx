@@ -1,5 +1,6 @@
 // src/components/LoginPage.jsx
 import { useState, useEffect } from "react";
+import logo from "../assets/logo.jpg";
 
 export default function LoginPage({
   onLogin,
@@ -40,7 +41,7 @@ export default function LoginPage({
     <div className="login-page">
       <div className="login-card">
         <img
-          src="/imagen/logo.jpg"
+          src={logo}
           alt="Logo de la empresa"
           className="login-logo"
         />
@@ -72,9 +73,11 @@ export default function LoginPage({
               type="button"
               className="password-toggle"
               onClick={() => setMostrarPassword((v) => !v)}
-              aria-label={mostrarPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+              aria-label={
+                mostrarPassword ? "Ocultar contraseña" : "Mostrar contraseña"
+              }
             >
-              <i className={`bi ${mostrarPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
+              <i className={`bi ${mostrarPassword ? "bi-eye-slash" : "bi-eye"}`} />
             </button>
           </div>
 
@@ -84,6 +87,7 @@ export default function LoginPage({
         </form>
       </div>
 
+      {/* MODAL PERSONALIZADO */}
       {mensaje && mostrarModal && (
         <>
           <div className="custom-modal-backdrop" onClick={cerrarModal}></div>
@@ -98,7 +102,7 @@ export default function LoginPage({
               <div className="modal-body">{mensaje}</div>
               <div className="modal-footer">
                 <button className="btn-secondary" onClick={cerrarModal}>
-                  Cerrar
+                  Aceptar
                 </button>
               </div>
             </div>

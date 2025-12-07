@@ -1,23 +1,19 @@
-// src/components/Layout.jsx
-import Sidebar from "./Sidebar";
-import Topbar from "./Topbar";
+// src/components/Principal.jsx
+import logo from "../assets/logo.jpg";
 
-export default function Layout({ user, seccion, onChangeSeccion, onLogout, children }) {
+export default function Principal({ nombreCompleto }) {
+  const nombreMostrar = nombreCompleto || "";
+
   return (
-    <div className="layout-rm">
-      <Sidebar
-        rol={user.rol}
-        seccion={seccion}
-        onChangeSeccion={onChangeSeccion}
-        onLogout={onLogout}
-      />
-
-      <div className="layout-main">
-        <Topbar nombreCompleto={user.nombreCompleto} />
-        <main className="layout-content">
-          {children}
-        </main>
+    <div className="principal-rm">
+      <div className="principal-logo-wrapper">
+        <img
+          src={logo}                
+          alt="Logo de la empresa"
+          className="principal-logo"
+        />
       </div>
+      <h2 className="principal-title">{nombreMostrar}</h2>
     </div>
   );
 }

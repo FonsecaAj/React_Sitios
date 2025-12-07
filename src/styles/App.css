@@ -1,85 +1,7 @@
-/* ===== LAYOUT GENERAL RELOJ MARCADOR ===== */
+/* ========================================================= */
+/*                   RESET Y BASE GLOBAL                     */
+/* ========================================================= */
 
-.layout-rm {
-  display: flex;
-  min-height: 100vh;
-  background: #e5edf7;
-}
-
-.layout-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.layout-content {
-  flex: 1;
-  padding: 40px 48px;
-}
-
-/* ===== TOPBAR ===== */
-
-.topbar-rm {
-  height: 64px;
-  background: #0078d7;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 32px;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
-}
-
-.topbar-user {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.topbar-user-name {
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
-.topbar-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  object-fit: cover;
-  border: 2px solid #ffffff;
-}
-
-/* ===== PANTALLA INICIO (PRINCIPAL) ===== */
-
-.principal-rm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 80px;
-}
-
-.principal-logo-wrapper {
-  background: #ffffff;
-  padding: 12px 28px;
-  border-radius: 999px;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
-}
-
-.principal-logo {
-  height: 70px;
-  display: block;
-}
-
-.principal-title {
-  margin-top: 26px;
-  font-size: 2rem;
-  font-weight: 600;
-  color: #0063d1;
-}
-
-
-/* ===== RESET SENCILLO ===== */
 *,
 *::before,
 *::after {
@@ -92,32 +14,45 @@ body,
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background-color: #eef3f9;
   color: #111827;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* ===== LOGIN ===== */
+/* ========================================================= */
+/*                          LOGIN                             */
+/* ========================================================= */
 
 .login-page {
   min-height: 100vh;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #eef3f9;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .login-card {
   background: #ffffff;
-  width: 420px;
+  width: 100%;
+  max-width: 420px;
   padding: 40px 45px;
   border-radius: 24px;
   box-shadow: 0 20px 60px rgba(15, 23, 42, 0.18);
   text-align: center;
+  margin: 20px;
 }
 
 .login-logo {
@@ -144,7 +79,7 @@ body {
   border: 1px solid #d1d5db;
   font-size: 0.95rem;
   background: #f9fafb;
-  color: #111827;          
+  color: #111827;
 }
 
 .form-group input::placeholder {
@@ -158,12 +93,14 @@ body {
   background: #ffffff;
 }
 
+/* grupo contraseña */
+
 .password-group {
   position: relative;
 }
 
 .password-group input {
-  padding-right: 40px;      
+  padding-right: 40px;
 }
 
 /* Botón del ojo */
@@ -205,10 +142,9 @@ body {
   cursor: default;
 }
 
-
-/* =================================================================== */
-/*                         MODAL DE MENSAJES                            */
-/* =================================================================== */
+/* ========================================================= */
+/*                     MODAL DE MENSAJES                      */
+/* ========================================================= */
 
 .custom-modal-backdrop {
   position: fixed;
@@ -259,15 +195,17 @@ body {
   justify-content: flex-end;
   gap: 8px;
 }
-
 .custom-modal .btn-secondary {
   border-radius: 999px;
   border: 1px solid #d1d5db;
   background: #ffffff;
-  padding: 4px 12px;
+  color: #111827;        
+  font-weight: 500;         
+  padding: 6px 18px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
+
 
 .btn-close-modal {
   border: none;
@@ -291,16 +229,23 @@ body {
   background: #2563eb;
 }
 
-/* =================================================================== */
-/*                         LAYOUT PRINCIPAL                             */
-/* =================================================================== */
+/* ========================================================= */
+/*                LAYOUT RELOJ MARCADOR (APP)                */
+/* ========================================================= */
 
-.layout {
+.layout-rm {
   display: flex;
   min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  background: #eef3f9;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-/* ---- Sidebar ---- */
+/* ---------- SIDEBAR ---------- */
 
 .sidebar-rm {
   width: 260px;
@@ -309,6 +254,8 @@ body {
   display: flex;
   flex-direction: column;
   padding: 20px 18px;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .sidebar-header {
@@ -335,53 +282,98 @@ body {
   flex: 1;
 }
 
-.sidebar-nav a {
-  font-size: 0.95rem;
-  text-decoration: none;
-  color: #374151;
-  padding: 8px 10px;
+
+
+.sidebar-item {
+  border: none;
+  background: none;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
   border-radius: 8px;
+  font-size: 0.95rem;
+  color: #374151;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.sidebar-nav a:hover {
+.sidebar-item-icon {
+  width: 1.2rem;
+  min-width: 1.2rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-item:hover:not(.disabled) {
   background: #e5f0ff;
   color: #0f59c3;
+}
+
+.sidebar-item.active {
+  background: #e1f0ff;
+  color: #0f59c3;
+  font-weight: 600;
+}
+
+.sidebar-item.disabled {
+  opacity: 0.55;
+  cursor: default;
 }
 
 .sidebar-logout {
   margin-top: 8px;
   font-size: 0.9rem;
   color: #b91c1c;
+  border: none;
+  background: none;
+  text-align: left;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-/* ---- Parte derecha (topbar + contenido) ---- */
+.sidebar-logout:hover {
+  background: #feeceb;
+}
+
+/* ---------- PARTE DERECHA: TOPBAR + CONTENIDO ---------- */
 
 .layout-main {
   flex: 1;
   display: flex;
   flex-direction: column;
   background: #eef3f9;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* Topbar */
+/* TOPBAR */
 
 .topbar-rm {
-  height: 56px;
+  height: 64px;
   background: #0078d7;
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 24px;
+  padding: 0 32px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
 }
 
 .topbar-user {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
-.topbar-name {
+.topbar-user-name {
+  font-weight: 500;
   font-size: 0.95rem;
 }
 
@@ -390,25 +382,20 @@ body {
   height: 32px;
   border-radius: 999px;
   background: #ffffff;
-  color: #0078d7;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 0.9rem;
+  overflow: hidden;       
 }
 
-.topbar-logout {
-  border-radius: 999px;
-  border: 1px solid #ffffff;
-  background: transparent;
-  color: #ffffff;
-  font-size: 0.8rem;
-  padding: 4px 10px;
-  cursor: pointer;
+.topbar-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-/* Contenido principal */
+/* CONTENIDO CENTRAL */
 
 .layout-content {
   flex: 1;
@@ -416,49 +403,71 @@ body {
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
+  overflow-y: auto;
+  width: 100%;
+  height: calc(100vh - 64px);
+  background: #eef3f9;
 }
 
-/* =================================================================== */
-/*                       PANTALLA PRINCIPAL                             */
-/* =================================================================== */
+/* ========================================================= */
+/*                   PANTALLA PRINCIPAL                      */
+/* ========================================================= */
 
-.principal {
+.principal-rm {
   text-align: center;
+  max-width: 600px;
 }
 
 .principal-logo-wrapper {
-  margin-bottom: 18px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #f0f4ff 55%, #dde8ff 100%);
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
 }
 
 .principal-logo {
-  width: 120px;
-  height: 120px;
-  border-radius: 999px;
-  object-fit: cover;
-  background: #ffffff;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: contain;
+  background-color: #ffffff;
+}
+
+.principal-subtitle {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #4a4f57;
 }
 
 .principal-title {
-  font-size: 1.6rem;
-  color: #0f59c3;
-  margin: 0;
+  margin-top: 0.25rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #0067d8;
 }
 
-/* =================================================================== */
-/*                           RESPONSIVE                                 */
-/* =================================================================== */
+/* ========================================================= */
+/*                        RESPONSIVE                          */
+/* ========================================================= */
 
 @media (max-width: 768px) {
-  .layout {
+  .layout-rm {
     flex-direction: column;
+    position: relative;
   }
 
   .sidebar-rm {
     width: 100%;
+    height: auto;
     flex-direction: row;
     align-items: center;
     overflow-x: auto;
+    padding: 12px 18px;
   }
 
   .sidebar-nav {
@@ -467,6 +476,10 @@ body {
   }
 
   .layout-main {
-    min-height: calc(100vh - 80px);
+    height: calc(100vh - 80px);
+  }
+
+  .layout-content {
+    height: calc(100vh - 144px);
   }
 }

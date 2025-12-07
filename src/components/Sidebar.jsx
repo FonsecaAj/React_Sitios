@@ -1,6 +1,5 @@
 // src/components/Sidebar.jsx
-
-export default function Sidebar({ rol, seccion, onChangeSeccion }) {
+export default function Sidebar({ rol, seccion, onChangeSeccion, onLogout }) {
   return (
     <aside className="sidebar-rm">
       <div className="sidebar-header">
@@ -9,83 +8,42 @@ export default function Sidebar({ rol, seccion, onChangeSeccion }) {
       </div>
 
       <nav className="sidebar-nav">
-        {rol === 2 && (
-          <>
-            <button
-              type="button"
-              className={`sidebar-link ${seccion === "inicio" ? "active" : ""}`}
-              onClick={() => onChangeSeccion("inicio")}
-            >
-              Inicio
-            </button>
-            <button
-              type="button"
-              className={`sidebar-link ${seccion === "marcas" ? "active" : ""}`}
-              onClick={() => onChangeSeccion("marcas")}
-            >
-               Marcas
-            </button>
-            <button
-              type="button"
-              className={`sidebar-link ${
-                seccion === "inconsistencias" ? "active" : ""
-              }`}
-              onClick={() => onChangeSeccion("inconsistencias")}
-            >
-              Inconsistencias
-            </button>
-            <button
-              type="button"
-              className="sidebar-link"
-              onClick={() => onChangeSeccion("permisos")}
-            >
-              📅Permisos
-            </button>
-            <button
-              type="button"
-              className="sidebar-link"
-              onClick={() => onChangeSeccion("nueva-vacacion")}
-            >
-               Nueva Vacación
-            </button>
-            <button
-              type="button"
-              className="sidebar-link"
-              onClick={() => onChangeSeccion("mis-solicitudes")}
-            >
-               Mis Solicitudes
-            </button>
-          </>
-        )}
+        <a
+          href="#inicio"
+          onClick={(e) => {
+            e.preventDefault();
+            onChangeSeccion("inicio");
+          }}
+          style={
+            seccion === "inicio"
+              ? { background: "#e5f0ff", color: "#0f59c3" }
+              : undefined
+          }
+        >
+          Inicio
+        </a>
 
-        {rol === 3 && (
-          <>
-            <button
-              type="button"
-              className={`sidebar-link ${seccion === "inicio" ? "active" : ""}`}
-              onClick={() => onChangeSeccion("inicio")}
-            >
-               Inicio
-            </button>
-            <button
-              type="button"
-              className="sidebar-link"
-              onClick={() => onChangeSeccion("bandeja")}
-            >
-              Bandeja de solicitudes
-            </button>
-            <button
-              type="button"
-              className="sidebar-link"
-              onClick={() => onChangeSeccion("resoluciones")}
-            >
-              📋 Ver Resoluciones
-            </button>
-          </>
+        {rol === 2 && (
+          <a
+            href="#marcas"
+            onClick={(e) => {
+              e.preventDefault();
+              onChangeSeccion("marcas");
+            }}
+            style={
+              seccion === "marcas"
+                ? { background: "#e5f0ff", color: "#0f59c3" }
+                : undefined
+            }
+          >
+            Marcas
+          </a>
         )}
       </nav>
 
-      <span className="sidebar-logout">Cerrar sesión</span>
+      <span className="sidebar-logout" onClick={onLogout}>
+        Cerrar sesión
+      </span>
     </aside>
   );
 }

@@ -17,9 +17,10 @@ export default function RelojMarcadorApp() {
     establecerMensaje,
   } = useAuth();
 
-  
+  // sección actual del módulo
   const [seccion, setSeccion] = useState("inicio");
 
+  // Si no hay usuario autenticado, mostramos solo el login
   if (!user) {
     return (
       <LoginPage
@@ -32,15 +33,41 @@ export default function RelojMarcadorApp() {
     );
   }
 
-  
+  // ----------------------------------------------------
+  // Elegimos qué contenido mostrar según la sección
+  // ----------------------------------------------------
   let contenido = null;
 
   if (seccion === "inicio") {
-    contenido = <Principal nombreCompleto={user.nombreCompleto} />;
+    const datos = user.datos || {};
+
+    const nombreDesdeApi =
+      datos.Nombre_Completo ||
+      datos.NombreCompleto ||
+      datos.nombreCompleto ||
+      datos.nombre_completo ||
+      `${(datos.Nombre ?? datos.nombre ?? "").trim()} ${
+        (datos.Apellido_1 ??
+          datos.Apellido1 ??
+          datos.apellido1 ??
+          "").trim()
+      } ${
+        (datos.Apellido_2 ??
+          datos.Apellido2 ??
+          datos.apellido2 ??
+          "").trim()
+      }`.trim();
+
+    const nombreCompleto =
+      (nombreDesdeApi && nombreDesdeApi.trim()) ||
+      user.nombreCompleto ||
+      user.usuario ||
+      "";
+
+    contenido = <Principal nombreCompleto={nombreCompleto} />;
   } else if (user.rol === 2 && seccion === "marcas") {
     contenido = <ListadoMarcas />;
   } else {
-
     contenido = (
       <div style={{ padding: "2rem" }}>
         <h2>Sección en construcción</h2>

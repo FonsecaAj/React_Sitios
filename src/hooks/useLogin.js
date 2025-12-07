@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { login as loginRequest } from "../services/loginService";
 
+// ================== OBTENER ROL ==================
 function obtenerRol(usuarioPlano) {
   if (!usuarioPlano) return 0;
 
@@ -20,45 +21,90 @@ function obtenerRol(usuarioPlano) {
   return Number(valor || 0);
 }
 
+// ================== OBTENER NOMBRE ==================
 function obtenerNombreCompleto(usuarioPlano, usuarioTexto) {
-  if (!usuarioPlano) return usuarioTexto || "";
-
-  // 1) Intentar campos típicos de nombre completo
-  const posiblesCompletos = [
-    usuarioPlano.Nombre_Completo,
-    usuarioPlano.NombreCompleto,
-    usuarioPlano.nombreCompleto,
-    usuarioPlano.nombre_completo,
-    usuarioPlano.Nombre_Usuario,
-    usuarioPlano.NombreUsuario,
-    usuarioPlano.nombreUsuario,
-  ];
-
-  let completo = posiblesCompletos.find(
-    (v) => typeof v === "string" && v.trim() !== ""
-  );
-
-
-  if (!completo) {
-    const nombre = usuarioPlano.Nombre ?? usuarioPlano.nombre ?? "";
-    const apellido1 =
-      usuarioPlano.Apellido_1 ??
-      usuarioPlano.Apellido1 ??
-      usuarioPlano.apellido1 ??
-      "";
-    const apellido2 =
-      usuarioPlano.Apellido_2 ??
-      usuarioPlano.Apellido2 ??
-      usuarioPlano.apellido2 ??
-      "";
-
-    completo = `${nombre} ${apellido1} ${apellido2}`.trim();
+  if (!usuarioPlano || typeof usuarioPlano !== "object") {
+    return (usuarioTexto || "").toString().trim();
   }
 
-  // 3) Fallback final: usuario (la cédula)
-  return (completo || usuarioTexto || "").toString().trim();
+  // 1) Claves típicas donde suele venir el nombre completo
+  const clavesPreferidas = [
+    "Nombre_Completo",
+    "NombreCompleto",
+    "nombreCompleto",
+    "nombre_completo",
+    "Nombre_Usuario",
+    "NombreUsuario",
+    "nombreUsuario",
+    "NombrePersona",
+    "nombrePersona",
+  ];
+
+  for (const k of clavesPreferidas) {
+    const v = usuarioPlano[k];
+    if (typeof v === "string") {
+      const s = v.trim();
+      if (s && /[a-zA-ZÁÉÍÓÚáéíóúñ]/.test(s)) {
+        return s;
+      }
+    }
+  }
+
+  // 2) Intentar armarlo con Nombre + Apellidos (muchas variantes)
+  const nombre =
+    usuarioPlano.Nombre ??
+    usuarioPlano.nombre ??
+    usuarioPlano.Nombres ??
+    usuarioPlano.nombres ??
+    "";
+
+  const apellido1 =
+    usuarioPlano.Apellido_1 ??
+    usuarioPlano.Apellido1 ??
+    usuarioPlano.apellido1 ??
+    usuarioPlano.PrimerApellido ??
+    usuarioPlano.primerApellido ??
+    usuarioPlano.primer_apellido ??
+    "";
+
+  const apellido2 =
+    usuarioPlano.Apellido_2 ??
+    usuarioPlano.Apellido2 ??
+    usuarioPlano.apellido2 ??
+    usuarioPlano.SegundoApellido ??
+    usuarioPlano.segundoApellido ??
+    usuarioPlano.segundo_apellido ??
+    "";
+
+  const armado = `${nombre} ${apellido1} ${apellido2}`
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (armado && /[a-zA-ZÁÉÍÓÚáéíóúñ]/.test(armado)) {
+    return armado;
+  }
+
+  // 3) Buscar cualquier string "larga con espacio" (parece nombre)
+  let candidato = "";
+  for (const v of Object.values(usuarioPlano)) {
+    if (typeof v === "string") {
+      const s = v.trim();
+      if (
+        s.length > candidato.length &&
+        s.includes(" ") &&
+        /[a-zA-ZÁÉÍÓÚáéíóúñ]/.test(s)
+      ) {
+        candidato = s;
+      }
+    }
+  }
+  if (candidato) return candidato;
+
+  // 4) Fallback a la cédula / usuario
+  return (usuarioTexto || "").toString().trim();
 }
 
+// ================== HOOK PRINCIPAL ==================
 export function useAuth() {
   const [user, setUser] = useState(null);
   const [cargando, setCargando] = useState(false);
@@ -104,11 +150,7 @@ export function useAuth() {
       console.log("Respuesta login API:", data);
 
       const exito =
-        data.exito ??
-        data.success ??
-        data.ok ??
-        data.estado ??
-        true;
+        data.exito ?? data.success ?? data.ok ?? data.estado ?? true;
 
       if (exito === false) {
         const msgApi =
@@ -129,7 +171,7 @@ export function useAuth() {
 
       console.log("Rol devuelto:", rol, "usuarioPlano:", usuarioPlano);
 
-      // 🔓 POR AHORA NO BLOQUEAMOS POR ROL EN EL FRONT
+      //  Si quieres volver a bloquear por rol, descomenta esto:
       // if (rol !== 2 && rol !== 3) {
       //   clasificarMensaje(
       //     "Acceso no autorizado. Solo usuarios de rol funcionario o jefatura."

@@ -15,7 +15,7 @@ export default function ListadoMarcas() {
     area,
     setArea,
     exportCSV
-  } = useMarcas(14); // id cambiar este ID por el id tomado de login, quemado ahorita porque no tenemos login
+  } = useMarcas(14); 
 
   return (
   <div className="marcas-wrapper">
