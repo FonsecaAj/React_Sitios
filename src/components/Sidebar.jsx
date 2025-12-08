@@ -1,4 +1,9 @@
+// src/components/Sidebar.jsx
 export default function Sidebar({ rol, seccion, onChangeSeccion, onLogout }) {
+  const rolNumero = Number(rol || 0);
+
+  console.log(" ROL dentro del Sidebar:", rolNumero);
+
   return (
     <aside className="sidebar-rm">
       <div className="sidebar-header">
@@ -7,22 +12,25 @@ export default function Sidebar({ rol, seccion, onChangeSeccion, onLogout }) {
       </div>
 
       <nav className="sidebar-nav">
+        {/* Siempre Inicio */}
         <a
           href="#inicio"
+          className="inicio-link"
           onClick={(e) => {
             e.preventDefault();
             onChangeSeccion("inicio");
           }}
           style={
             seccion === "inicio"
-              ? { background: "#e5f0ff", color: "#0f59c3" }
+              ? { background: "#e5f0ff" } 
               : undefined
           }
         >
           Inicio
         </a>
 
-        {rol === 2 && (
+        {/* Solo FUNCIONARIO (rol 2) */}
+        {rolNumero === 2 && (
           <a
             href="#marcas"
             onClick={(e) => {
@@ -31,15 +39,17 @@ export default function Sidebar({ rol, seccion, onChangeSeccion, onLogout }) {
             }}
             style={
               seccion === "marcas"
-                ? { background: "#e5f0ff", color: "#0f59c3" }
+                ? { background: "#e5f0ff" } 
                 : undefined
             }
           >
+  
             Marcas
           </a>
         )}
 
-        {rol === 3 && (
+        {/* Solo JEFATURA (rol 3) */}
+        {rolNumero === 3 && (
           <a
             href="#proc1"
             onClick={(e) => {
@@ -48,11 +58,12 @@ export default function Sidebar({ rol, seccion, onChangeSeccion, onLogout }) {
             }}
             style={
               seccion === "proc1"
-                ? { background: "#e5f0ff", color: "#0f59c3" }
+                ? { background: "#e5f0ff" } 
                 : undefined
             }
           >
-            Proc1
+       
+            Inconsistencias
           </a>
         )}
       </nav>

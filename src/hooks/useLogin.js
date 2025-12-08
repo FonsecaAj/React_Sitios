@@ -7,7 +7,8 @@ function obtenerRol(usuarioPlano) {
   if (!usuarioPlano) return 0;
 
   const posibles = [
-    usuarioPlano.ID_Rol_Usuario,
+    usuarioPlano.ID_Rol_Usuario,   
+    usuarioPlano.iD_Rol_Usuario,   
     usuarioPlano.IdRolUsuario,
     usuarioPlano.idRolUsuario,
     usuarioPlano.idRol,
@@ -18,8 +19,13 @@ function obtenerRol(usuarioPlano) {
   ];
 
   const valor = posibles.find((v) => v !== undefined && v !== null);
+
+  console.log(">>> usuarioPlano:", usuarioPlano);
+  console.log(">>> rol detectado:", valor);
+
   return Number(valor || 0);
 }
+
 
 // ================== OBTENER NOMBRE ==================
 function obtenerNombreCompleto(usuarioPlano, usuarioTexto) {

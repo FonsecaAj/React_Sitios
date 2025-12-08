@@ -5,6 +5,8 @@ import LoginPage from "./components/LoginPage";
 import Layout from "./components/Layout";
 import Principal from "./components/Principal";
 import ListadoMarcas from "./components/ListadoMarcas";
+import Proc1 from "./components/Proc1"; 
+
 
 export default function RelojMarcadorApp() {
   const {
@@ -67,7 +69,11 @@ export default function RelojMarcadorApp() {
     contenido = <Principal nombreCompleto={nombreCompleto} />;
   } else if (user.rol === 2 && seccion === "marcas") {
     contenido = <ListadoMarcas />;
-  } else {
+  } 
+  else if (user.rol === 3 && seccion === "proc1") {
+    contenido = <Proc1 />;
+  }
+  else {
     contenido = (
       <div style={{ padding: "2rem" }}>
         <h2>Sección en construcción</h2>

@@ -9,38 +9,38 @@ export default function Layout({
   onLogout,
   children,
 }) {
-  
-  if (!user) return null;
 
+  const datos = user?.datos || {};
 
-  const displayName =
-    user.datos?.Nombre_Completo ||
-    user.datos?.NombreCompleto ||
-    user.datos?.nombreCompleto ||
-    user.datos?.nombre_completo ||
-    user.datos?.Nombre ||
-    user.datos?.nombre ||
-    user.nombreCompleto ||
-    user.usuario ||
-    "";
+  const rolNormalizado = Number(
+    datos.ID_Rol_Usuario ??
+      datos.iD_Rol_Usuario ??   
+      datos.IdRolUsuario ??
+      datos.idRolUsuario ??
+      datos.idRol ??
+      datos.rol ??
+      datos.Rol ??
+      datos.rolUsuario ??
+      datos.id_rol_usuario ??
+      user?.rol ?? // por si acaso
+      0
+  );
+
+  console.log(" user.datos desde Layout:", datos);
+  console.log(" ROL normalizado que mandamos al Sidebar:", rolNormalizado);
 
   return (
     <div className="layout-rm">
       <Sidebar
-        rol={user.rol}
+        rol={rolNormalizado}              
         seccion={seccion}
         onChangeSeccion={onChangeSeccion}
         onLogout={onLogout}
       />
 
       <div className="layout-main">
-        {/* Aquí ya mandamos el nombre “bonito” */}
-        <Topbar nombreCompleto={displayName} />
-
-        <main className="layout-content">
-    
-          {children}
-        </main>
+        <Topbar nombreCompleto={user.nombreCompleto} />
+        <main className="layout-content">{children}</main>
       </div>
     </div>
   );
