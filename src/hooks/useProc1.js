@@ -126,6 +126,14 @@ export function useProc1() {
         try {
             const response = await ejecutarPROC1(payload);
 
+                    // ============================
+        // LIMPIAR CAMPOS AL EJECUTAR
+        // ============================
+            setFechaInicio("");
+            setFechaFin("");
+            setAreaId(null);
+            setUsuarioId(null);
+
             // Éxito
             openModal(
                 "success", 
