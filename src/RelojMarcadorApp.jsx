@@ -74,7 +74,19 @@ export default function RelojMarcadorApp() {
     // 🔹 FUNCIONARIO
     contenido = <ListadoMarcas />;
 
-  } else if (user.rol === 3 && seccion === "proc1") {
+  } else if (user.rol === 2 && seccion === "usr5-inconsistencias") {
+    contenido = <USR5_Inconsistencias />;
+
+  } else if (user.rol === 2 && seccion === "usr6-permisos") {
+    contenido = <USR6_Permisos />;
+
+  }else if (user.rol === 2 && seccion === "usr7-nueva") {
+    contenido = <USR7_NuevaVacacion />;
+  
+  }else if (user.rol === 2 && seccion === "usr7-mis") {
+    contenido = <USR7_MisVacaciones />;
+    
+  }else if (user.rol === 3 && seccion === "proc1") {
     contenido = <Proc1 />;
 
   } else if (user.rol === 3 && seccion === "jefatura-pendientes") {
