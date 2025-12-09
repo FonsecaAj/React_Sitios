@@ -6,6 +6,8 @@ import Layout from "./components/Layout";
 import Principal from "./components/Principal";
 import ListadoMarcas from "./components/ListadoMarcas";
 import Proc1 from "./components/Proc1";
+import JefaturaPendientes from "./jefatura/pages/JefaturaPendientes";
+import JefaturaResoluciones from "./jefatura/pages/JefaturaResoluciones";
 
 export default function RelojMarcadorApp() {
 
@@ -67,14 +69,33 @@ export default function RelojMarcadorApp() {
       "";
 
     contenido = <Principal nombreCompleto={nombreCompleto} />;
-  } 
-  else if (user.rol === 2 && seccion === "marcas") {
+
+  } else if (user.rol === 2 && seccion === "marcas") {
+    // 🔹 FUNCIONARIO
     contenido = <ListadoMarcas />;
-  }
-  else if (user.rol === 3 && seccion === "proc1") {
+
+  } else if (user.rol === 2 && seccion === "usr5-inconsistencias") {
+    contenido = <USR5_Inconsistencias />;
+
+  } else if (user.rol === 2 && seccion === "usr6-permisos") {
+    contenido = <USR6_Permisos />;
+
+  }else if (user.rol === 2 && seccion === "usr7-nueva") {
+    contenido = <USR7_NuevaVacacion />;
+  
+  }else if (user.rol === 2 && seccion === "usr7-mis") {
+    contenido = <USR7_MisVacaciones />;
+    
+  }else if (user.rol === 3 && seccion === "proc1") {
     contenido = <Proc1 />;
-  }
-  else {
+
+  } else if (user.rol === 3 && seccion === "jefatura-pendientes") {
+    contenido = <JefaturaPendientes />;
+
+  } else if (user.rol === 3 && seccion === "jefatura-resoluciones") {
+    contenido = <JefaturaResoluciones />;
+
+  } else {
     contenido = (
       <div style={{ padding: "2rem" }}>
         <h2>Sección en construcción</h2>

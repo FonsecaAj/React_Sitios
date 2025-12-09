@@ -17,7 +17,16 @@ export default defineConfig({
         secure: false,
         rewrite: path =>
           path.replace(/^\/proc1-api/, '/apiproc1/api/proc1')
+      },
+
+      '/jefatura-api': {
+        target: 'https://tiusr25pl.cuc-carrera-ti.ac.cr',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path =>
+          path.replace(/^\/jefatura-api/, '/APIJefatura/api/jefatura')
       }
+
     }
   }
 })
