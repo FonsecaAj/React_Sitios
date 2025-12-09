@@ -1,6 +1,6 @@
 // src/RelojMarcadorApp.jsx
 import { useState } from "react";
-import { useAuth } from "./hooks/useLogin";
+import { useAuthContext } from "./context/AuthContext";   // ← CORRECTO
 import LoginPage from "./components/LoginPage";
 import Layout from "./components/Layout";
 import Principal from "./components/Principal";
@@ -10,6 +10,8 @@ import JefaturaPendientes from "./jefatura/pages/JefaturaPendientes";
 import JefaturaResoluciones from "./jefatura/pages/JefaturaResoluciones";
 
 export default function RelojMarcadorApp() {
+
+  // ⬇️ AHORA SÍ usamos el user del AuthContext
   const {
     user,
     cargando,
@@ -18,12 +20,11 @@ export default function RelojMarcadorApp() {
     iniciarSesion,
     cerrarSesion,
     establecerMensaje,
-  } = useAuth();
+  } = useAuthContext();   // ← ESTE ERA EL ERROR
 
-  // sección actual del módulo
   const [seccion, setSeccion] = useState("inicio");
 
-  // Si no hay usuario autenticado, mostramos solo el login
+  // Si no hay usuario autenticado → login
   if (!user) {
     return (
       <LoginPage
@@ -36,9 +37,9 @@ export default function RelojMarcadorApp() {
     );
   }
 
-  // ----------------------------------------------------
-  // Elegimos qué contenido mostrar según la sección
-  // ----------------------------------------------------
+  // --------------------------------------------
+  // Seleccionar sección del menú lateral
+  // --------------------------------------------
   let contenido = null;
 
   if (seccion === "inicio") {
