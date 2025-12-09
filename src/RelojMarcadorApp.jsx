@@ -1,6 +1,6 @@
 // src/RelojMarcadorApp.jsx
 import { useState } from "react";
-import { useAuthContext } from "./context/AuthContext";   // ← CORRECTO
+import { useAuthContext } from "./context/AuthContext";  
 import LoginPage from "./components/LoginPage";
 import Layout from "./components/Layout";
 import Principal from "./components/Principal";
@@ -9,7 +9,7 @@ import Proc1 from "./components/Proc1";
 
 export default function RelojMarcadorApp() {
 
-  // ⬇️ AHORA SÍ usamos el user del AuthContext
+
   const {
     user,
     cargando,
@@ -18,7 +18,7 @@ export default function RelojMarcadorApp() {
     iniciarSesion,
     cerrarSesion,
     establecerMensaje,
-  } = useAuthContext();   // ← ESTE ERA EL ERROR
+  } = useAuthContext();   
 
   const [seccion, setSeccion] = useState("inicio");
 
