@@ -98,8 +98,7 @@ export default function RelojMarcadorApp() {
   } else {
     contenido = (
       <div style={{ padding: "2rem" }}>
-        <h2>Sección en construcción</h2>
-        <p>Próximamente más opciones aquí.</p>
+     
       </div>
     );
   }
