@@ -1,4 +1,5 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'https://tiusr13pl.cuc-carrera-ti.ac.cr/apiprograv/api'
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'https://tiusr25pl.cuc-carrera-ti.ac.cr/apis/api'
+
 
 
 export async function apiFetch(path, options = {}) {
